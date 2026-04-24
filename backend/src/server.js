@@ -14,9 +14,9 @@ const PORT = process.env.PORT || 5030;
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: process.env.FRONTEND_URL || "https://your-app.vercel.app",
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 app.get("/", (req, res) => {
@@ -36,7 +36,7 @@ const startServer = async () => {
     console.log("Database synced");
 
     app.listen(PORT, () => {
-     console.log(`Server running on port ${PORT}`);
+      console.log(`Server running on port ${PORT}`);
     });
   } catch (error) {
     console.error("Failed to start server:", error);
