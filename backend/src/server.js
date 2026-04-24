@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5030;
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "https://your-app.vercel.app",
+    origin: process.env.FRONTEND_URL || "https://task-management-saas-five.vercel.app",
     credentials: true,
   }),
 );
