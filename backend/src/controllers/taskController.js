@@ -1,11 +1,11 @@
-import Task from '../models/Task.js';
-import { validateTask } from '../utils/validation.js';
+import Task from "../models/Task.js";
+import { validateTask } from "../utils/validation.js";
 
 export const getTasks = async (req, res, next) => {
   try {
     const tasks = await Task.findAll({
       where: { user_id: req.user.id },
-      order: [['created_at', 'DESC']]
+      order: [["created_at", "DESC"]],
     });
 
     res.json(tasks);
@@ -19,13 +19,13 @@ export const createTask = async (req, res, next) => {
     const { title, description } = req.body;
 
     if (!validateTask(title)) {
-      return res.status(400).json({ message: 'Title is required' });
+      return res.status(400).json({ message: "Title is required" });
     }
 
     const task = await Task.create({
       user_id: req.user.id,
       title,
-      description: description || ''
+      description: description || "",
     });
 
     res.status(201).json(task);
@@ -42,16 +42,16 @@ export const updateTask = async (req, res, next) => {
     const task = await Task.findByPk(id);
 
     if (!task) {
-      return res.status(404).json({ message: 'Task not found' });
+      return res.status(404).json({ message: "Task not found" });
     }
 
     if (task.user_id !== req.user.id) {
-      return res.status(403).json({ message: 'Unauthorized' });
+      return res.status(403).json({ message: "Unauthorized" });
     }
 
     if (title !== undefined) {
       if (!validateTask(title)) {
-        return res.status(400).json({ message: 'Title is required' });
+        return res.status(400).json({ message: "Title is required" });
       }
       task.title = title;
     }
@@ -61,8 +61,8 @@ export const updateTask = async (req, res, next) => {
     }
 
     if (status !== undefined) {
-      if (!['pending', 'completed'].includes(status)) {
-        return res.status(400).json({ message: 'Invalid status' });
+      if (!["pending", "completed"].includes(status)) {
+        return res.status(400).json({ message: "Invalid status" });
       }
       task.status = status;
     }
@@ -82,16 +82,16 @@ export const deleteTask = async (req, res, next) => {
     const task = await Task.findByPk(id);
 
     if (!task) {
-      return res.status(404).json({ message: 'Task not found' });
+      return res.status(404).json({ message: "Task not found" });
     }
 
     if (task.user_id !== req.user.id) {
-      return res.status(403).json({ message: 'Unauthorized' });
+      return res.status(403).json({ message: "Unauthorized" });
     }
 
     await task.destroy();
 
-    res.json({ message: 'Task deleted' });
+    res.json({ message: "Task deleted" });
   } catch (error) {
     next(error);
   }
