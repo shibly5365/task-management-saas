@@ -19,7 +19,9 @@ app.use(
   })
 );
 app.use(express.json());
-
+app.get("/", (req, res) => {
+  res.send("API is running 🚀");
+});
 app.use("/api/auth", authRouter);
 app.use("/api/tasks", taskRouter);
 
