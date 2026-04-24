@@ -66,11 +66,12 @@ export const Dashboard = () => {
     }
   };
 
-  const handleLogout = () => {
+const handleLogout = () => {
+  if (window.confirm("Are you sure you want to logout?")) {
     logout();
     navigate('/login');
-  };
-
+  }
+};
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
