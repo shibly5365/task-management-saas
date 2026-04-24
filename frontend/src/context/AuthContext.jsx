@@ -30,8 +30,8 @@ export const AuthProvider = ({ children }) => {
       }
 
       const data = await response.json();
-      setToken(data.token);
-      setUser(data.user);
+      // setToken(data.token);
+      // setUser(data.user);
       return data.user;
     } finally {
       setLoading(false);

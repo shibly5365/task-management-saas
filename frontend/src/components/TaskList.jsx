@@ -1,14 +1,16 @@
-import { TaskItem } from './TaskItem';
+import { TaskItem } from "./TaskItem";
 
 export const TaskList = ({ tasks, onUpdate, onDelete, isDeletingId }) => {
-  const pendingTasks = tasks.filter(t => t.status === 'pending');
-  const completedTasks = tasks.filter(t => t.status === 'completed');
+  const pendingTasks = tasks.filter((t) => t.status === "pending");
+  const completedTasks = tasks.filter((t) => t.status === "completed");
 
   return (
     <div>
       {tasks.length === 0 ? (
         <div className="text-center py-8">
-          <p className="text-gray-500 text-lg">No tasks yet. Create your first task above!</p>
+          <p className="text-gray-500 text-lg">
+            No tasks yet. Create your first task above!
+          </p>
         </div>
       ) : (
         <>
@@ -20,7 +22,7 @@ export const TaskList = ({ tasks, onUpdate, onDelete, isDeletingId }) => {
                 </span>
                 Pending Tasks
               </h3>
-              {pendingTasks.map(task => (
+              {pendingTasks.map((task) => (
                 <TaskItem
                   key={task.id}
                   task={task}
@@ -40,7 +42,7 @@ export const TaskList = ({ tasks, onUpdate, onDelete, isDeletingId }) => {
                 </span>
                 Completed Tasks
               </h3>
-              {completedTasks.map(task => (
+              {completedTasks.map((task) => (
                 <TaskItem
                   key={task.id}
                   task={task}
